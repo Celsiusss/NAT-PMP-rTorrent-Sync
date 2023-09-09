@@ -1,0 +1,3 @@
+NAT-PMP==1.3.2
+netifaces==0.11.0
+schedule==1.2.0
