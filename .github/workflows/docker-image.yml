@@ -27,3 +27,5 @@ jobs:
         push: true
         tags: |
           ghcr.io/celsiuss/nat-pmp-rtorrent-sync:latest
+        build-args: |
+            GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
