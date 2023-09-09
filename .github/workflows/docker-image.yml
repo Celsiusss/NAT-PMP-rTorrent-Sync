@@ -27,4 +27,3 @@ jobs:
         push: true
         tags: |
           ghcr.io/celsiuss/nat-pmp-rtorrent-sync:latest
-          ghcr.io/celsiuss/nat-pmp-rtorrent-sync:$(date +%s)
