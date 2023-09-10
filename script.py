@@ -14,7 +14,11 @@ GATEWAY=os.getenv("GATEWAY") or "10.2.0.1"
 
 def log(msg, err = False):
     date = datetime.datetime.now()
-    print(f"[{date}] {msg}", file=sys.stderr if err else sys.stdout)
+    if err:
+        print(f"[{date}] {msg}", file=sys.stderr)
+    else:
+        print(f"[{date}] {msg}")
+        
 
 def set_port(port):
     with xmlrpc.client.ServerProxy(RPC_URL) as s:
@@ -40,9 +44,7 @@ def run():
         log("An error occured while trying to update port.", err=True)
         log(e, err=True)
 
-
-
-log ("Starting")
+log("Starting")
 log(f"RPC_URL={RPC_URL}")
 log(f"GATEWAY={GATEWAY}")
 
