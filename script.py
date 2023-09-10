@@ -29,6 +29,11 @@ def run():
         set_port(res.public_port)
         log("Assigned port: " + str(res.public_port))
 
+
+log ("Starting")
+log(f"RPC_URL={RPC_URL}")
+log(f"GATEWAY={GATEWAY}")
+
 run()
 schedule.every(30).seconds.do(run)
 
