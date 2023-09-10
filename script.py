@@ -21,13 +21,25 @@ def set_port(port):
         s.network.port_range.set("", f"{port}-{port}")
 
 def run():
-    res = natpmp.map_port(natpmp.NATPMP_PROTOCOL_TCP, 0, 0, 60, GATEWAY)
+    try:
+        res = natpmp.map_port(natpmp.NATPMP_PROTOCOL_TCP, 0, 0, 60, GATEWAY)
+    except Exception as e:
+        log("An error occured while requesting a port.", err=True)
+        log(e, err=True)
+        return
+
 
     if res.result != 0:
         log("Error: " + res, True)
-    else:
+        return
+    
+    try:
         set_port(res.public_port)
         log("Assigned port: " + str(res.public_port))
+    except Exception as e:
+        log("An error occured while trying to update port.", err=True)
+        log(e, err=True)
+
 
 
 log ("Starting")
