@@ -21,24 +21,13 @@ def set_port(port):
         s.network.port_range.set("", f"{port}-{port}")
 
 def run():
-    previous_port = 0
-
-    try:
-        with open("/tmp/assigned_port", "r") as f:
-            previous_port = int(f.read())
-    except:
-        previous_port = 0
-
     res = natpmp.map_port(natpmp.NATPMP_PROTOCOL_TCP, 0, 0, 60, GATEWAY)
 
     if res.result != 0:
         log("Error: " + res, True)
     else:
         set_port(res.public_port)
-        if res.public_port != previous_port:
-            with open("/tmp/assigned_port", "w") as f:
-                f.write(str(res.public_port))
-            log("Assigned new port: " + str(res.public_port))
+        log("Assigned port: " + str(res.public_port))
 
 run()
 schedule.every(30).seconds.do(run)
